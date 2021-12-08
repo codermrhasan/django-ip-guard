@@ -25,7 +25,14 @@ __________________
 3. Add :code:`DIG_ENABLED = True` in your settings.py  
 4. Add :code:`DIG_STORAGE = 'db'` in your settings.py if you want to use your database for storing Rules. If you want to use environment variables then add `DIG_STORAGE = 'env'`.
 5. Now migrate database :code:`python manage.py migrate`.
-6. If you choose 'db' you don't need to add anymore variables in settings.py. 
+6. If you want to detect users IP address  ::
+
+    from django_ip_guard.utils import get_client_ip
+    ...
+    get_client_ip(request)
+    ...
+    
+8. If you choose 'db' you don't need to add anymore variables in settings.py. 
    
    1. You need to login to admin panel and add **Dig Rules** (Only the first row is counted).  
    2. When you add **Dig rules** you can see **Blocker url patterns** and **Blocker ip patterns**. By using these two fields you can actually block some ip addresses to get access of certain page or the entire website. Common use cases: 
@@ -63,7 +70,7 @@ __________________
         
         So this will only allow mentioned ip addresses to access admin panel. For entire site add :code:`^/`
 
-7. If you choose 'env' then you don't need to add rules in database. You need to add more variables in settings.py::
+9. If you choose 'env' then you don't need to add rules in database. You need to add more variables in settings.py::
     
     BLOCKER_URL_PATTERNS="^/blog/,^contact-us/$"
     BLOCKER_IP_PATTERNS="175.38.89.10[0-9],98.981.98.98"
